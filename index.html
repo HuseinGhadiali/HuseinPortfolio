@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Husein Ghadiali | Data, Software & Websites for MIDC Businesses, Pimpri-Chinchwad</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Data-driven solutions for manufacturers and traders in Bhosari MIDC and Pimpri-Chinchwad: data analysis, reports and dashboards, automation for Tally, DataScan and Excel, process consulting and websites. By Husein Ghadiali.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wdth,wght@75..100,400..800&family=Mukta:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<meta property="og:title" content="Husein Ghadiali | Data, Software & Websites for MIDC Businesses">
+<meta property="og:description" content="Data analysis, reports, automation and websites for manufacturers in Bhosari MIDC and Pimpri-Chinchwad.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#14223A">
+<style>
+/* Layout: the page is a ledger. Each section is an entry with its label in a red-ruled margin column; the hero holds a live "invoice check" slip. */
+:root{
+  --paper:#F2F5F1;      /* ledger page, faint green bias */
+  --sheet:#FFFFFF;
+  --ink:#14223A;        /* navy ink */
+  --muted:#55655F;
+  --rule:#D2DED5;       /* ledger ruling */
+  --rule-strong:#AFC3B6;
+  --margin:#B3362A;     /* red margin line */
+  --pen:#1D4DA6;        /* fountain-pen blue, the accent */
+  --on-pen:#FFFFFF;
+  --ok:#1C7347; --ok-bg:#E1F1E7; --pen-bg:#E3EAF7;
+  --bad:#A8322A; --bad-bg:#FAE6E2;
+  --f-display:"Anek Devanagari","Mukta","Noto Sans Devanagari",system-ui,sans-serif;
+  --f-body:"Mukta","Noto Sans Devanagari",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  --s-1:.8125rem; --s0:1.0625rem; --s1:1.25rem; --s2:1.6rem; --s3:clamp(1.9rem,3.6vw,2.6rem); --s4:clamp(2.6rem,6.4vw,4.6rem);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0E1716; --sheet:#152220; --ink:#E4EDE8; --muted:#9AAEA6; --rule:#22342F; --rule-strong:#354C45;
+  --margin:#E0715F; --pen:#8AACF3; --on-pen:#0E1716; --ok:#63C891; --ok-bg:#163428; --bad:#F08A7B; --bad-bg:#3A1E1A; --pen-bg:#1B2842; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0E1716; --sheet:#152220; --ink:#E4EDE8; --muted:#9AAEA6; --rule:#22342F; --rule-strong:#354C45;
+  --margin:#E0715F; --pen:#8AACF3; --on-pen:#0E1716; --ok:#63C891; --ok-bg:#163428; --bad:#F08A7B; --bad-bg:#3A1E1A; --pen-bg:#1B2842; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:var(--s0);line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:var(--pen)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--pen);outline-offset:2px}
+.wrap{max-width:1160px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+h2{font-size:var(--s3);font-weight:700;font-stretch:85%;line-height:1.05;letter-spacing:-.01em}
+h3{font-size:var(--s1);font-weight:650;line-height:1.25}
+:lang(hi) h1,:lang(mr) h1,:lang(hi) h2,:lang(mr) h2{line-height:1.25;letter-spacing:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+:lang(hi) :is(.eyebrow,.entry-label,.slip-head .k,.kind,.line .k,.tools .k,.tags,.pill,.ba strong),:lang(mr) :is(.eyebrow,.entry-label,.slip-head .k,.kind,.line .k,.tools .k,.tags,.pill,.ba strong){font-family:var(--f-body);letter-spacing:0;text-transform:none;font-size:.9rem;font-weight:500}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:1.25rem;padding-block:.7rem}
+.brand{display:flex;flex-direction:column;text-decoration:none;color:var(--ink);line-height:1.1;margin-right:auto}
+.brand b{font-family:var(--f-display);font-weight:750;font-stretch:80%;font-size:1.35rem;letter-spacing:.01em}
+.brand span{font-family:var(--f-mono);font-size:.7rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.nav{display:flex;gap:1.1rem}
+.nav a{color:var(--ink);text-decoration:none;font-size:.95rem}
+.nav a:hover{color:var(--pen)}
+.lang{display:flex;border:1px solid var(--rule-strong);border-radius:6px;overflow:hidden}
+.lang button{font:inherit;font-size:.85rem;background:transparent;color:var(--muted);border:0;padding:.25rem .6rem;cursor:pointer;min-width:2.6rem}
+.lang button+button{border-left:1px solid var(--rule-strong)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font:inherit;font-weight:600;text-decoration:none;border-radius:6px;padding:.7rem 1.1rem;cursor:pointer;border:1px solid transparent;line-height:1.2}
+.btn-pen{background:var(--pen);color:var(--on-pen)}
+.btn-pen:hover{filter:brightness(1.08)}
+.btn-line{border-color:var(--rule-strong);color:var(--ink);background:transparent}
+.btn-line:hover{border-color:var(--ink)}
+.btn-sm{padding:.45rem .8rem;font-size:.92rem}
+.wa-ico{width:1.1em;height:1.1em;flex:none}
+@media (max-width:900px){.nav{display:none}}
+@media (max-width:520px){.top .btn-sm{display:none}.brand span{display:none}}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;padding-block:clamp(2.5rem,6vw,5rem)}
+.hero-copy{display:flex;flex-direction:column;gap:1.4rem;min-width:0}
+.eyebrow{font-family:var(--f-mono);font-size:var(--s-1);letter-spacing:.08em;text-transform:uppercase;color:var(--margin)}
+h1{font-size:var(--s4);font-weight:760;font-stretch:78%;line-height:.98;letter-spacing:-.015em}
+.lead{font-size:var(--s1);color:var(--muted);max-width:38ch;line-height:1.55}
+.ctas{display:flex;flex-wrap:wrap;gap:.75rem}
+.note{font-size:.95rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:1rem;max-width:46ch}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+
+/* invoice-check slip */
+.slip{background:var(--sheet);border:1px solid var(--rule-strong);border-radius:4px;position:relative;min-width:0;
+  box-shadow:0 1px 0 var(--rule),0 18px 40px -24px rgba(20,34,58,.35)}
+.slip::before{content:"";position:absolute;top:0;bottom:0;left:3.2rem;border-left:3px double var(--margin);opacity:.75}
+.slip-head{padding:1.1rem 1.25rem .9rem 4.2rem;border-bottom:1px solid var(--rule-strong)}
+.slip-head .k{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--margin)}
+.slip-head h2{font-size:1.5rem;font-stretch:85%;margin-top:.15rem}
+.slip-head p{color:var(--muted);font-size:.95rem}
+.rows{background:repeating-linear-gradient(to bottom,transparent 0 2.95rem,var(--rule) 2.95rem 3rem)}
+.row{display:grid;grid-template-columns:3.2rem 1fr auto;align-items:center;min-height:3rem;padding-right:1.25rem}
+.row .n{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);text-align:center}
+.row .l{padding-left:1rem;color:var(--muted);font-size:.95rem}
+.row .v{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-weight:500;text-align:right}
+.row-range{grid-template-columns:3.2rem 1fr;min-height:3rem}
+.row-range input{width:100%;margin-left:1rem;accent-color:var(--pen)}
+.status{margin:1rem 1.25rem 0 4.2rem;padding:.8rem 1rem;border-radius:4px;display:flex;flex-direction:column;gap:.15rem;transition:background .25s,color .25s}
+.status b{font-family:var(--f-display);font-size:1.25rem;font-weight:700;font-stretch:85%}
+.status span{font-size:.92rem}
+.status.ok{background:var(--ok-bg);color:var(--ok)}
+.status.bad{background:var(--bad-bg);color:var(--bad)}
+.slip-foot{padding:.9rem 1.25rem 1.1rem 4.2rem;color:var(--muted);font-size:.88rem}
+.slip-head h2.k{font-family:var(--f-mono);font-size:.72rem;font-weight:500;line-height:1.4}
+.tabs{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.7rem}
+.tabs button{font:inherit;font-size:.88rem;padding:.3rem .7rem;border:1px solid var(--rule-strong);background:transparent;color:var(--muted);border-radius:99px;cursor:pointer;line-height:1.3}
+.tabs button:hover{color:var(--ink);border-color:var(--ink)}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.panel-q{padding:1rem 1.25rem .6rem 4.2rem;font-size:1.4rem;font-weight:700;font-stretch:85%;line-height:1.2}
+.row.r4{grid-template-columns:3.2rem minmax(0,1fr) 4.3rem 4.3rem 4.3rem}
+.row-h .l,.row-h .v{font-family:var(--f-body);font-size:.8rem;font-weight:500;color:var(--muted)}
+.v.neg{color:var(--bad)}
+.status.info{background:var(--pen-bg);color:var(--pen)}
+.panel .status:only-of-type b{font-size:1.1rem}
+@media (max-width:420px){.row.r4{grid-template-columns:3.2rem minmax(0,1fr) 3.2rem 3.2rem 3.5rem;padding-right:.75rem}.row.r4 .v{font-size:.85rem}}
+
+/* ledger entries */
+.entry{border-top:1px solid var(--rule)}
+.entry>.wrap{display:grid;grid-template-columns:11rem minmax(0,1fr);padding-block:clamp(3rem,6vw,4.75rem)}
+.entry-label{font-family:var(--f-mono);font-size:var(--s-1);letter-spacing:.08em;text-transform:uppercase;color:var(--margin);padding-top:.55rem;padding-right:1.25rem}
+.entry-body{border-left:3px double var(--margin);padding-left:clamp(1.25rem,3vw,2.5rem);display:flex;flex-direction:column;gap:2rem;min-width:0}
+@media (max-width:760px){.entry>.wrap{grid-template-columns:1fr;gap:.75rem}.entry-label{padding:0}.entry-body{border-left:0;padding-left:0}}
+
+/* problems */
+.leaks{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-strong)}
+.leaks li{display:grid;grid-template-columns:2.2rem 1fr;gap:.5rem;padding:.8rem 0;border-bottom:1px solid var(--rule);font-size:var(--s1);line-height:1.4}
+.leaks li::before{content:"✕";font-family:var(--f-mono);color:var(--margin);font-size:1rem;padding-top:.15rem}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--rule-strong)}
+.svc article{padding:1.4rem 1.5rem 1.5rem 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:.55rem}
+.svc article:nth-child(even){padding-left:1.5rem;padding-right:0;border-left:1px solid var(--rule)}
+.svc p{color:var(--muted)}
+.tags{font-family:var(--f-mono);font-size:.78rem;color:var(--ink);letter-spacing:.02em;margin-top:auto;padding-top:.4rem}
+@media (max-width:640px){.svc{grid-template-columns:1fr}.svc article,.svc article:nth-child(even){padding:1.25rem 0;border-left:0}}
+
+/* case study */
+.intro{font-size:var(--s1);color:var(--muted);max-width:60ch;line-height:1.5}
+.feature{background:var(--sheet);border:1px solid var(--rule-strong);border-radius:4px;padding:clamp(1.25rem,3vw,2rem);display:flex;flex-direction:column;gap:1.25rem}
+.kind{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.feature h3{font-size:var(--s2);font-stretch:85%}
+.ba{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
+.ba div{display:flex;flex-direction:column;gap:.35rem;padding-top:.75rem;border-top:2px solid var(--rule-strong)}
+.ba div.after{border-top-color:var(--ok)}
+.ba strong{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+.result{font-family:var(--f-display);font-size:var(--s1);font-weight:650;color:var(--ok)}
+@media (max-width:640px){.ba{grid-template-columns:1fr}}
+.more{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.75rem}
+.more article{display:flex;flex-direction:column;gap:.5rem;padding-top:1rem;border-top:1px solid var(--rule-strong)}
+.more p{color:var(--muted)}
+.pill{align-self:flex-start;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.05em;padding:.1rem .5rem;border-radius:99px;border:1px solid var(--margin);color:var(--margin)}
+@media (max-width:860px){.more{grid-template-columns:1fr}}
+
+/* experience */
+.exp{display:flex;flex-direction:column;border-top:1px solid var(--rule-strong)}
+.exp article{display:grid;grid-template-columns:7rem 14rem minmax(0,1fr);gap:1.25rem;padding:1.1rem 0;border-bottom:1px solid var(--rule)}
+.exp .yr{font-family:var(--f-mono);font-size:.85rem;color:var(--muted);padding-top:.2rem;font-variant-numeric:tabular-nums}
+.exp .org{font-weight:700;line-height:1.3}
+.exp p{color:var(--muted)}
+@media (max-width:860px){.exp article{grid-template-columns:6rem minmax(0,1fr)}.exp p{grid-column:2}}
+@media (max-width:480px){.exp article{grid-template-columns:1fr;gap:.25rem}.exp p{grid-column:auto}}
+
+/* process */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem;counter-reset:s}
+.steps li{counter-increment:s;display:flex;flex-direction:column;gap:.45rem}
+.steps li::before{content:counter(s);font-family:var(--f-display);font-weight:750;font-stretch:75%;font-size:2.6rem;line-height:1;color:var(--pen);border-bottom:1px solid var(--rule-strong);padding-bottom:.4rem;margin-bottom:.3rem}
+.steps p{color:var(--muted)}
+.trust{display:flex;gap:.75rem;align-items:flex-start;padding:1rem 1.1rem;background:var(--sheet);border:1px solid var(--rule);border-radius:4px;max-width:60ch}
+.trust svg{flex:none;width:1.3rem;height:1.3rem;color:var(--ok);margin-top:.2rem}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.steps{grid-template-columns:1fr}}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2.5rem}
+.about .txt{display:flex;flex-direction:column;gap:1rem;font-size:1.1rem;max-width:62ch}
+.facts{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-strong)}
+.facts li{padding:.65rem 0;border-bottom:1px solid var(--rule);line-height:1.4}
+.tools{display:flex;flex-direction:column;gap:.5rem}
+.tools .k{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tools ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
+.tools li{font-family:var(--f-mono);font-size:.85rem;padding:.2rem .6rem;border:1px solid var(--rule-strong);border-radius:4px;background:var(--sheet)}
+@media (max-width:860px){.about{grid-template-columns:1fr}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:2.5rem;align-items:start}
+form{background:var(--sheet);border:1px solid var(--rule-strong);border-radius:4px;padding:clamp(1.25rem,3vw,1.75rem);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.fld{display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.fld.full{grid-column:1/-1}
+label{font-size:.9rem;font-weight:500}
+input[type=text],select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--paper);border:1px solid var(--rule-strong);border-radius:4px;padding:.55rem .7rem;width:100%}
+textarea{min-height:5.5rem;resize:vertical}
+form .btn{grid-column:1/-1;justify-self:start;white-space:nowrap}
+.fnote{grid-column:1/-1;font-size:.85rem;color:var(--muted)}
+.direct{display:flex;flex-direction:column;gap:1rem}
+.direct h3{font-size:var(--s1)}
+.line{display:grid;grid-template-columns:5.5rem minmax(0,1fr) auto;align-items:center;gap:.75rem;padding:.7rem 0;border-bottom:1px solid var(--rule)}
+.line .k{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.line a,.line .v{font-family:var(--f-mono);font-size:.95rem;overflow-wrap:anywhere;user-select:all}
+.copy{font:inherit;font-size:.8rem;background:transparent;border:1px solid var(--rule-strong);color:var(--ink);border-radius:4px;padding:.2rem .55rem;cursor:pointer}
+.area{color:var(--muted);font-size:.95rem}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+@media (max-width:520px){form{grid-template-columns:1fr}}
+
+footer{border-top:3px double var(--margin)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;padding-block:2rem;color:var(--muted);font-size:.92rem}
+footer nav{display:flex;flex-wrap:wrap;gap:1.1rem}
+</style>
+<style>:root{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" id="top-link"><b>Husein Ghadiali</b><span>Data · Software · Websites</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#work" data-i18n="nav.work">Work</a>
+      <a href="#process" data-i18n="nav.process">How I work</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-en" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" id="lang-hi" data-lang="hi" aria-pressed="false" lang="hi">हिं</button>
+      <button type="button" id="lang-mr" data-lang="mr" aria-pressed="false" lang="mr">मरा</button>
+    </div>
+    <a class="btn btn-pen btn-sm" href="#contact" data-i18n="nav.cta">Free check-up</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow" data-i18n="hero.eyebrow">Bhosari MIDC · Pimpri-Chinchwad</p>
+      <h1 data-i18n="hero.h1">Put your business data to work.</h1>
+      <p class="lead" data-i18n="hero.lead">Data-driven solutions for manufacturers and traders: clean, connected data, fewer manual entries, reports and dashboards you can act on, better software, and a website that brings in enquiries. Whether your data sits in Tally, DataScan, Excel or paper registers, I help you use it.</p>
+      <div class="ctas">
+        <a class="btn btn-pen js-wa-hero" href="https://wa.me/917887884566" target="_blank" rel="noopener"><svg class="wa-ico"><use href="#wa"/></svg><span data-i18n="hero.cta1">Book a free check-up on WhatsApp</span></a>
+        <a class="btn btn-line" href="#work" data-i18n="hero.cta2">See the Apeksha Alloys case</a>
+      </div>
+      <p class="note" data-i18n="hero.note">8 years as a data analyst in Pune and New York. Partner in a steel business in Bhosari MIDC since 2015.</p>
+    </div>
+
+    <div class="slip" aria-labelledby="demo-title">
+      <div class="slip-head">
+        <h2 class="k" id="demo-title" data-i18n="demo.label">Questions your data can answer</h2>
+        <div class="tabs" role="tablist" aria-labelledby="demo-title">
+          <button type="button" role="tab" id="tab-stock" aria-controls="pn-stock" aria-selected="true" data-i18n="tab.stock">Stock check</button>
+          <button type="button" role="tab" id="tab-rate" aria-controls="pn-rate" aria-selected="false" tabindex="-1" data-i18n="tab.rate">Rate history</button>
+          <button type="button" role="tab" id="tab-party" aria-controls="pn-party" aria-selected="false" tabindex="-1" data-i18n="tab.party">Parties buying less</button>
+        </div>
+      </div>
+
+      <div class="panel" role="tabpanel" id="pn-rate" aria-labelledby="tab-rate" hidden>
+        <h3 class="panel-q" data-i18n="rate.q">What rate should I quote Party A?</h3>
+        <div class="rows">
+          <div class="row"><span class="n"></span><span class="l" data-i18n="demo.item">Item</span><span class="v" data-i18n="demo.itemVal">EN31 round bar, Ø 80 mm</span></div>
+          <div class="row row-h"><span class="n"></span><span class="l" data-i18n="rate.date">Order date</span><span class="v" data-i18n="rate.rate">Rate (₹/kg)</span></div>
+          <div class="row"><span class="n">1</span><span class="l mono">12 Aug 2026</span><span class="v">118</span></div>
+          <div class="row"><span class="n">2</span><span class="l mono">03 Sep 2026</span><span class="v">121</span></div>
+          <div class="row"><span class="n">3</span><span class="l mono">07 Oct 2026</span><span class="v">122</span></div>
+        </div>
+        <div class="status info"><b data-i18n="rate.sugg">Suggested quote: ₹123–125/kg</b><span data-i18n="rate.sub">Based on the last three orders and today's purchase cost.</span></div>
+        <p class="slip-foot" data-i18n="rate.cap">Example data, from the rate finder being built at Apeksha Alloys.</p>
+      </div>
+
+      <div class="panel" role="tabpanel" id="pn-party" aria-labelledby="tab-party" hidden>
+        <h3 class="panel-q" data-i18n="party.q">Which regular customers are slipping away?</h3>
+        <div class="rows">
+          <div class="row r4 row-h"><span class="n"></span><span class="l" data-i18n="party.p">Party</span><span class="v" data-i18n="party.last">Last qtr</span><span class="v" data-i18n="party.now">This qtr</span><span class="v" data-i18n="party.chg">Change</span></div>
+          <div class="row r4"><span class="n">1</span><span class="l">Party A</span><span class="v">12.4</span><span class="v">7.1</span><span class="v neg">−43%</span></div>
+          <div class="row r4"><span class="n">2</span><span class="l">Party B</span><span class="v">8.0</span><span class="v">5.6</span><span class="v neg">−30%</span></div>
+          <div class="row r4"><span class="n">3</span><span class="l">Party C</span><span class="v">6.2</span><span class="v">5.1</span><span class="v neg">−18%</span></div>
+          <div class="row r4"><span class="n">4</span><span class="l">Party D</span><span class="v">9.5</span><span class="v">9.8</span><span class="v">+3%</span></div>
+        </div>
+        <div class="status bad"><b data-i18n="party.flag">3 parties are down more than 15%. Worth a call this week.</b></div>
+        <p class="slip-foot" data-i18n="party.cap">Example data, in tonnes. The same analysis runs on your own sales records.</p>
+      </div>
+
+      <div class="panel" role="tabpanel" id="pn-stock" aria-labelledby="tab-stock">
+      <h3 class="panel-q" data-i18n="demo.sub">Is there enough stock for this invoice?</h3>
+      <div class="rows">
+        <div class="row"><span class="n">1</span><span class="l" data-i18n="demo.item">Item</span><span class="v" data-i18n="demo.itemVal">EN31 round bar, Ø 80 mm</span></div>
+        <div class="row"><span class="n">2</span><span class="l" data-i18n="demo.stock">In stock</span><span class="v"><span id="stock-v">96</span> kg</span></div>
+        <div class="row"><span class="n">3</span><label class="l" for="qty" data-i18n="demo.qty">Quantity on this invoice</label><span class="v"><output id="qty-v" for="qty">120</output> kg</span></div>
+        <div class="row row-range"><span class="n"></span><input type="range" id="qty" min="0" max="200" step="4" value="120" aria-describedby="status"></div>
+      </div>
+      <div class="status bad" id="status" role="status" aria-live="polite">
+        <b id="status-t">Blocked: short by 24 kg</b>
+        <span id="status-s">Bring in material or lower the quantity first.</span>
+      </div>
+      <p class="slip-foot" data-i18n="demo.caption">The rule set up at Apeksha Alloys. Move the slider to try it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="entry" id="problems">
+  <div class="wrap">
+    <p class="entry-label" data-i18n="problems.label">Sound familiar?</p>
+    <div class="entry-body">
+      <h2 data-i18n="problems.h2">Where time and money slip away on most MIDC office desks</h2>
+      <ul class="leaks">
+        <li data-i18n="p1">The same order is typed three times: challan, invoice, then Excel.</li>
+        <li data-i18n="p2">The stock register and the purchase entries don't agree, and nobody knows since when.</li>
+        <li data-i18n="p3">Monthly reports are put together by hand, so they arrive late.</li>
+        <li data-i18n="p4">Rates and party history live in one person's head.</li>
+        <li data-i18n="p5">The only online presence is an old IndiaMART or JustDial listing.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="entry" id="services">
+  <div class="wrap">
+    <p class="entry-label" data-i18n="services.label">Services</p>
+    <div class="entry-body">
+      <h2 data-i18n="services.h2">What I do</h2>
+      <div class="svc">
+        <article><h3 data-i18n="s1.t">Software clean-up and automation</h3><p data-i18n="s1.d">Make Tally, DataScan and Excel work together. Remove repeat entries, add checks at the right step, and build small tools where the software falls short.</p><p class="tags">Tally · DataScan · Excel · Python</p></article>
+        <article><h3 data-i18n="s2.t">Data analysis and reports</h3><p data-i18n="s2.d">Sales by party and grade, rate history, margins, slow-moving stock, and parties who are buying less. Clear reports your team can open on any day, not just at month-end.</p><p class="tags">Excel · Power BI · SQL</p></article>
+        <article><h3 data-i18n="s3.t">Websites for industrial businesses</h3><p data-i18n="s3.d">A fast site with your products, photos and a WhatsApp quote button, in English, Hindi and Marathi, set up so buyers can find you on Google.</p><p class="tags" data-i18n="s3.k">Catalogue · WhatsApp · Google</p></article>
+        <article><h3 data-i18n="s4.t">Process consulting</h3><p data-i18n="s4.d">We walk through how an order moves from enquiry to dispatch, find where errors creep in, and fix the step rather than blame the person.</p><p class="tags" data-i18n="s4.k">Enquiry → Dispatch · Stock · Billing</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="entry" id="work">
+  <div class="wrap">
+    <p class="entry-label" data-i18n="work.label">Work</p>
+    <div class="entry-body">
+      <h2 data-i18n="work.h2">Case study: Apeksha Alloys Inn LLP</h2>
+      <p class="intro" data-i18n="work.intro">A steel stockist in Bhosari MIDC that supplies 500+ businesses with carbon, alloy and tool steel cut to size. It is my family's business and my first client.</p>
+
+      <article class="feature">
+        <p class="kind" data-i18n="c1.tag">Data analysis · Process</p>
+        <h3 data-i18n="c1.t">Stock is checked before every invoice</h3>
+        <div class="ba">
+          <div><strong data-i18n="c1.bl">Before</strong><p data-i18n="c1.b">Invoices were made first and stock was reconciled later. When I analysed their DataScan data, the stock on record did not match the purchase entries.</p></div>
+          <div class="after"><strong data-i18n="c1.al">After</strong><p data-i18n="c1.a">I advised a simple rule: before an invoice is made, the stock for that item is checked against it, and the bill goes ahead only if the material is there.</p></div>
+        </div>
+        <p class="result" data-i18n="c1.r">Result: stock against invoices is now accurate.</p>
+      </article>
+
+      <div class="more">
+        <article><p class="kind" data-i18n="c2.tag">Software</p><h3 data-i18n="c2.t">DataScan, streamlined</h3><p data-i18n="c2.d">Mapped the daily entry work and cut out repetitive, tedious entries, so staff spend less time typing the same details again.</p></article>
+        <article><p class="kind" data-i18n="c3.tag">Website</p><h3 data-i18n="c3.t">A website in three languages</h3><p data-i18n="c3.d">Eight material families, cutting and testing services, industries served, and a quote form that goes straight to WhatsApp. It replaced old directory listings.</p><a href="https://www.apekshaalloys.com/" target="_blank" rel="noopener" data-i18n="c3.link">Visit apekshaalloys.com</a></article>
+        <article><span class="pill" data-i18n="c4.tag">In progress</span><h3 data-i18n="c4.t">Rate finder and sales analysis</h3><p data-i18n="c4.d">Built on challan exports: suggests rates by party and grade, and flags parties who have reduced their purchases so the team can follow up.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="entry" id="experience">
+  <div class="wrap">
+    <p class="entry-label" data-i18n="exp.label">Background</p>
+    <div class="entry-body">
+      <h2 data-i18n="exp.h2">Methods from large organisations, sized for your business</h2>
+      <div class="exp">
+        <article><span class="yr">2026</span><span class="org" data-i18n="e3.org">US distributor (contract)</span><p data-i18n="e3.d">Replaced a manual Excel ordering process with an order-entry tool linked to the vendor's system, matching every item against a master catalogue.</p></article>
+        <article><span class="yr">2025–26</span><span class="org">New York Bone &amp; Joint Specialists</span><p data-i18n="e2.d">Moved 50,000+ patient records to a new software system on schedule, with data clean-up, sign-off checks and training for 50+ staff. A Tally migration needs the same care.</p></article>
+        <article><span class="yr">2024–25</span><span class="org">Northwell Health, New York</span><p data-i18n="e1.d">Built the central Power BI reports for department heads, halving ad-hoc report requests. Moved 15+ Excel and VBA routines to automated Python, making the monthly reporting cycle 20% shorter.</p></article>
+        <article><span class="yr">2017–21</span><span class="org">Anucool Industrial Aids, Pune</span><p data-i18n="e4.d">Replaced hand-compiled sales reports with connected SQL and Excel dashboards, cutting monthly compilation time by 60%.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="entry" id="process">
+  <div class="wrap">
+    <p class="entry-label" data-i18n="process.label">How I work</p>
+    <div class="entry-body">
+      <h2 data-i18n="process.h2">From first visit to a working system</h2>
+      <ol class="steps">
+        <li><h3 data-i18n="st1.t">Free check-up</h3><p data-i18n="st1.d">30 minutes at your office or on a call. I look at how orders, stock and billing move today.</p></li>
+        <li><h3 data-i18n="st2.t">Written findings</h3><p data-i18n="st2.d">A short note in plain language: what is costing time or money, what to fix first, and a price for each fix.</p></li>
+        <li><h3 data-i18n="st3.t">Build and set up</h3><p data-i18n="st3.d">One change at a time, alongside your staff, without stopping daily billing.</p></li>
+        <li><h3 data-i18n="st4.t">Training and support</h3><p data-i18n="st4.d">Your team learns the new way of working, and I stay on call after it goes live.</p></li>
+      </ol>
+      <p class="trust"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 3 4 6v6c0 4.5 3.4 8.2 8 9 4.6-.8 8-4.5 8-9V6l-8-3Z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="m8.5 12 2.5 2.5 4.5-5"/></svg><span data-i18n="process.trust">Your data stays with you. I work at your office or on your own computers, and nothing is shared.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="entry" id="about">
+  <div class="wrap">
+    <p class="entry-label" data-i18n="about.label">About</p>
+    <div class="entry-body">
+      <h2>Husein Ghadiali</h2>
+      <div class="about">
+        <div class="txt">
+          <p data-i18n="about.p1">Since 2015 I have been a partner with my father at Apeksha Alloys, a steel stockist in Bhosari MIDC. I know what a billing desk looks like at month-end, and how much depends on the software behind it.</p>
+          <p data-i18n="about.p2">I then spent five years in New York, earning a Master's in Business Analytics and working as a data analyst in healthcare. Now I'm back in Pune, bringing those methods to businesses like ours.</p>
+        </div>
+        <div class="direct">
+          <ul class="facts">
+            <li data-i18n="f1">8 years in data analysis</li>
+            <li data-i18n="f2">MS Business Analytics, Adelphi University, New York (GPA 3.97)</li>
+            <li data-i18n="f3">B.Com, Savitribai Phule Pune University</li>
+            <li data-i18n="f4">Partner, Apeksha Alloys Inn LLP</li>
+          </ul>
+          <div class="tools">
+            <p class="k" data-i18n="tools.label">Tools I work with</p>
+            <ul><li>Tally</li><li>DataScan</li><li>Excel</li><li>Power BI</li><li>Tableau</li><li>SQL</li><li>Python</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="entry" id="contact">
+  <div class="wrap">
+    <p class="entry-label" data-i18n="contact.label">Contact</p>
+    <div class="entry-body">
+      <h2 data-i18n="contact.h2">Book a free 30-minute check-up</h2>
+      <p class="intro" data-i18n="contact.lead">Tell me what slows your office down. I'll look at your current setup and tell you plainly what's worth fixing. No charge, no obligation.</p>
+      <div class="contact">
+        <form id="audit-form" novalidate>
+          <div class="fld"><label for="f-name" data-i18n="f.name">Your name</label><input type="text" id="f-name" autocomplete="name"></div>
+          <div class="fld"><label for="f-company" data-i18n="f.company">Company</label><input type="text" id="f-company" autocomplete="organization"></div>
+          <div class="fld"><label for="f-area" data-i18n="f.area">Area</label><input type="text" id="f-area" data-i18n-ph="f.areaPh" placeholder="e.g. Bhosari MIDC, Chinchwad"></div>
+          <div class="fld"><label for="f-soft" data-i18n="f.soft">Software you use now</label>
+            <select id="f-soft"><option value="Tally">Tally</option><option value="DataScan">DataScan</option><option value="Excel" data-i18n="opt.excel">Excel only</option><option value="Other" data-i18n="opt.other">Other / none</option></select></div>
+          <div class="fld full"><label for="f-issue" data-i18n="f.issue">What slows you down?</label><textarea id="f-issue" data-i18n-ph="f.issuePh" placeholder="e.g. stock never matches, the same entry is typed twice"></textarea></div>
+          <button class="btn btn-pen" type="submit" id="f-send"><svg class="wa-ico"><use href="#wa"/></svg><span data-i18n="f.send">Send on WhatsApp</span></button>
+          <p class="fnote" data-i18n="f.note">Opens WhatsApp with your message filled in. Nothing is stored on this site.</p>
+        </form>
+        <div class="direct">
+          <h3 data-i18n="direct.h">Or reach me directly</h3>
+          <div>
+            <div class="line"><span class="k">WhatsApp</span><a class="js-wa-hero" href="https://wa.me/917887884566" target="_blank" rel="noopener">+91 78878 84566</a><button class="copy" type="button" id="copy-wa" data-copy="+91 78878 84566" data-i18n="copy">Copy</button></div>
+            <div class="line"><span class="k" data-i18n="direct.call">Call</span><a href="tel:+917887884566">+91 78878 84566</a><button class="copy" type="button" id="copy-tel" data-copy="+917887884566" data-i18n="copy">Copy</button></div>
+            <div class="line"><span class="k" data-i18n="direct.email">Email</span><a href="mailto:husein2709@gmail.com">husein2709@gmail.com</a><button class="copy" type="button" id="copy-mail" data-copy="husein2709@gmail.com" data-i18n="copy">Copy</button></div>
+          </div>
+          <p class="area" data-i18n="direct.area">I visit businesses in Bhosari MIDC and across Pimpri-Chinchwad.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b style="color:var(--ink)">Husein Ghadiali</b> · <span data-i18n="footer.tag">Data, software and websites for businesses in Pimpri-Chinchwad.</span></p>
+    <nav aria-label="Elsewhere">
+      <a href="https://www.linkedin.com/in/husein-ghadiali" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/HuseinGhadiali" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.apekshaalloys.com/" target="_blank" rel="noopener">Apeksha Alloys</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var WA = "917887884566";
+  var T = {
+    hi: {
+      "nav.services":"सेवाएँ","nav.work":"काम","nav.process":"काम का तरीका","nav.about":"परिचय","nav.contact":"संपर्क","nav.cta":"मुफ़्त जाँच",
+      "hero.eyebrow":"भोसरी MIDC · पिंपरी-चिंचवड",
+      "hero.h1":"अपने बिज़नेस के डेटा को काम पर लगाइए।",
+      "hero.lead":"मैन्युफैक्चरर्स और ट्रेडर्स के लिए डेटा पर आधारित समाधान: साफ़ और जुड़ा हुआ डेटा, कम हाथ की एंट्री, ऐसी रिपोर्ट और डैशबोर्ड जिन पर फ़ैसले लिए जा सकें, बेहतर सॉफ़्टवेयर, और नई पूछताछ लाने वाली वेबसाइट। आपका डेटा Tally, DataScan, Excel या रजिस्टर में हो, मैं उसे काम में लाने में मदद करता हूँ।",
+      "hero.cta1":"WhatsApp पर मुफ़्त जाँच बुक करें","hero.cta2":"अपेक्षा अलॉयज़ का उदाहरण देखें",
+      "hero.note":"पुणे और न्यूयॉर्क में डेटा एनालिस्ट के रूप में 8 साल का अनुभव। 2015 से भोसरी MIDC के एक स्टील बिज़नेस में पार्टनर।",
+      "demo.label":"आपका डेटा इन सवालों के जवाब दे सकता है","demo.sub":"क्या इस बिल के लिए स्टॉक है?","tab.stock":"स्टॉक जाँच","tab.rate":"रेट इतिहास","tab.party":"कम खरीद रही पार्टियाँ","rate.q":"पार्टी A को क्या रेट बताऊँ?","rate.date":"ऑर्डर तारीख","rate.rate":"रेट (₹/kg)","rate.sugg":"सुझाया रेट: ₹123–125/kg","rate.sub":"पिछले तीन ऑर्डर और आज की खरीद लागत के आधार पर।","rate.cap":"उदाहरण डेटा, अपेक्षा अलॉयज़ में बन रहे रेट फ़ाइंडर से।","party.q":"कौन से नियमित ग्राहक दूर हो रहे हैं?","party.p":"पार्टी","party.last":"पहले","party.now":"अब","party.chg":"बदलाव","party.flag":"3 पार्टियों की खरीद 15% से ज़्यादा घटी है। इस हफ़्ते फ़ोन करना ठीक रहेगा।","party.cap":"उदाहरण डेटा, पिछली और इस तिमाही की खरीद, टन में। यही एनालिसिस आपके अपने सेल्स रिकॉर्ड पर भी हो सकता है।","demo.item":"माल","demo.itemVal":"EN31 राउंड बार, Ø 80 mm",
+      "demo.stock":"गोदाम में स्टॉक","demo.qty":"इस बिल की मात्रा","demo.ok":"बिल बना सकते हैं","demo.left":"इस बिल के बाद बचा स्टॉक: {n} kg",
+      "demo.block":"रोका गया: {n} kg कम है","demo.blockSub":"पहले माल मँगवाएँ या मात्रा कम करें।","demo.caption":"यही नियम अपेक्षा अलॉयज़ में लागू किया गया। स्लाइडर हिलाकर देखें।",
+      "problems.label":"जाना-पहचाना लगता है?","problems.h2":"ज़्यादातर MIDC दफ़्तरों में समय और पैसा यहीं निकल जाता है",
+      "p1":"एक ही ऑर्डर तीन बार टाइप होता है: चालान, बिल, फिर Excel।","p2":"स्टॉक रजिस्टर और खरीद की एंट्री मेल नहीं खातीं, और किसी को पता नहीं कब से।",
+      "p3":"महीने की रिपोर्ट हाथ से बनती है, इसलिए देर से आती है।","p4":"रेट और पार्टी का पूरा इतिहास एक ही आदमी के दिमाग में रहता है।","p5":"ऑनलाइन बस एक पुरानी IndiaMART या JustDial लिस्टिंग है।",
+      "services.label":"सेवाएँ","services.h2":"मैं क्या करता हूँ",
+      "s1.t":"सॉफ़्टवेयर की सफ़ाई और ऑटोमेशन","s1.d":"Tally, DataScan और Excel को एक साथ काम करवाना। दोहरी एंट्री हटाना, सही कदम पर जाँच लगाना, और जहाँ सॉफ़्टवेयर कम पड़े वहाँ छोटे टूल बनाना।",
+      "s2.t":"डेटा एनालिसिस और रिपोर्ट","s2.d":"पार्टी और ग्रेड के हिसाब से बिक्री, रेट का इतिहास, मार्जिन, धीमा चलने वाला स्टॉक, और कम खरीद रही पार्टियाँ। साफ़ रिपोर्ट जो आपकी टीम किसी भी दिन खोल सके, सिर्फ़ महीने के आख़िर में नहीं।",
+      "s3.t":"इंडस्ट्रियल बिज़नेस के लिए वेबसाइट","s3.d":"आपके प्रोडक्ट, फ़ोटो और WhatsApp कोटेशन बटन वाली तेज़ वेबसाइट, अंग्रेज़ी, हिंदी और मराठी में, ताकि खरीदार आपको Google पर ढूँढ सकें।","s3.k":"कैटलॉग · WhatsApp · Google",
+      "s4.t":"प्रोसेस कंसल्टिंग","s4.d":"हम देखते हैं कि ऑर्डर पूछताछ से डिस्पैच तक कैसे चलता है, गलतियाँ कहाँ होती हैं, और आदमी को दोष देने के बजाय उस कदम को ठीक करते हैं।","s4.k":"पूछताछ → डिस्पैच · स्टॉक · बिलिंग",
+      "work.label":"काम","work.h2":"केस स्टडी: अपेक्षा अलॉयज़ इन LLP",
+      "work.intro":"भोसरी MIDC का स्टील स्टॉकिस्ट, जो 500+ बिज़नेस को कार्बन, अलॉय और टूल स्टील साइज़ में काटकर देता है। यह मेरे परिवार का बिज़नेस है और मेरा पहला क्लाइंट।",
+      "c1.tag":"डेटा एनालिसिस · प्रोसेस","c1.t":"हर बिल से पहले स्टॉक की जाँच","c1.bl":"पहले","c1.al":"अब",
+      "c1.b":"पहले बिल बनता था और स्टॉक का मिलान बाद में होता था। जब मैंने DataScan का डेटा एनालाइज़ किया, तो रिकॉर्ड का स्टॉक खरीद की एंट्री से मेल नहीं खा रहा था।",
+      "c1.a":"मैंने एक सीधा नियम सुझाया: बिल बनने से पहले उस माल का स्टॉक बिल से मिलाया जाता है, और माल होने पर ही बिल आगे बढ़ता है।",
+      "c1.r":"नतीजा: अब बिल के हिसाब से स्टॉक सटीक है।",
+      "c2.tag":"सॉफ़्टवेयर","c2.t":"DataScan को आसान बनाया","c2.d":"रोज़ की एंट्री के काम को समझा और बार-बार की थकाऊ एंट्री हटाईं, ताकि स्टाफ़ को एक ही जानकारी दोबारा टाइप न करनी पड़े।",
+      "c3.tag":"वेबसाइट","c3.t":"तीन भाषाओं में वेबसाइट","c3.d":"आठ मटीरियल फ़ैमिली, कटिंग और टेस्टिंग सेवाएँ, इंडस्ट्री की जानकारी, और सीधे WhatsApp पर जाने वाला कोटेशन फ़ॉर्म। इसने पुरानी डायरेक्टरी लिस्टिंग की जगह ली।","c3.link":"apekshaalloys.com देखें",
+      "c4.tag":"काम जारी","c4.t":"रेट फ़ाइंडर और सेल्स एनालिसिस","c4.d":"चालान एक्सपोर्ट पर बना टूल: पार्टी और ग्रेड के हिसाब से रेट सुझाता है, और कम खरीद रही पार्टियों को दिखाता है ताकि टीम उनसे बात कर सके।",
+      "exp.label":"अनुभव","exp.h2":"बड़ी संस्थाओं के तरीके, आपके बिज़नेस के नाप के",
+      "e3.org":"अमेरिकी डिस्ट्रीब्यूटर (कॉन्ट्रैक्ट)","e3.d":"हाथ से चलने वाली Excel ऑर्डरिंग की जगह वेंडर के सिस्टम से जुड़ा ऑर्डर-एंट्री टूल बनाया, जो हर आइटम को मास्टर कैटलॉग से मिलाता है।",
+      "e2.d":"50,000+ मरीज़ों के रिकॉर्ड समय पर नए सॉफ़्टवेयर में ले गया, डेटा की सफ़ाई, जाँच और 50+ स्टाफ़ की ट्रेनिंग के साथ। Tally से बदलाव में भी यही सावधानी चाहिए।",
+      "e1.d":"विभाग प्रमुखों के लिए मुख्य Power BI रिपोर्ट बनाईं, जिससे अलग-अलग रिपोर्ट की माँग आधी हो गई। 15+ Excel और VBA काम ऑटोमेटेड Python पर ले गया, जिससे महीने की रिपोर्टिंग 20% जल्दी होने लगी।",
+      "e4.d":"हाथ से बनने वाली सेल्स रिपोर्ट की जगह जुड़े हुए SQL और Excel डैशबोर्ड बनाए, जिससे महीने की रिपोर्ट बनाने का समय 60% कम हुआ।",
+      "process.label":"काम का तरीका","process.h2":"पहली मुलाक़ात से चालू सिस्टम तक",
+      "st1.t":"मुफ़्त जाँच","st1.d":"आपके दफ़्तर में या कॉल पर 30 मिनट। मैं देखता हूँ कि अभी ऑर्डर, स्टॉक और बिलिंग कैसे चलते हैं।",
+      "st2.t":"लिखित रिपोर्ट","st2.d":"सीधी भाषा में छोटा नोट: क्या समय या पैसा खा रहा है, पहले क्या ठीक करना है, और हर काम की कीमत।",
+      "st3.t":"बनाना और लगाना","st3.d":"एक बार में एक बदलाव, आपके स्टाफ़ के साथ, रोज़ की बिलिंग रोके बिना।",
+      "st4.t":"ट्रेनिंग और सपोर्ट","st4.d":"आपकी टीम नया तरीका सीखती है, और शुरू होने के बाद भी मैं उपलब्ध रहता हूँ।",
+      "process.trust":"आपका डेटा आपके पास ही रहता है। मैं आपके दफ़्तर में या आपके ही कंप्यूटर पर काम करता हूँ, और कुछ भी बाहर साझा नहीं होता।",
+      "about.label":"परिचय",
+      "about.p1":"2015 से मैं अपने पिता के साथ भोसरी MIDC के स्टील स्टॉकिस्ट, अपेक्षा अलॉयज़ में पार्टनर हूँ। मैं जानता हूँ कि महीने के आख़िर में बिलिंग डेस्क का क्या हाल होता है, और उसके पीछे के सॉफ़्टवेयर पर कितना कुछ टिका होता है।",
+      "about.p2":"फिर मैंने न्यूयॉर्क में पाँच साल बिताए, बिज़नेस एनालिटिक्स में मास्टर्स किया और हेल्थकेयर में डेटा एनालिस्ट के रूप में काम किया। अब मैं पुणे लौट आया हूँ और वही तरीके हमारे जैसे बिज़नेस तक ला रहा हूँ।",
+      "f1":"डेटा एनालिसिस में 8 साल","f2":"MS बिज़नेस एनालिटिक्स, Adelphi University, न्यूयॉर्क (GPA 3.97)","f3":"B.Com, सावित्रीबाई फुले पुणे विश्वविद्यालय","f4":"पार्टनर, अपेक्षा अलॉयज़ इन LLP",
+      "tools.label":"जिन टूल्स पर काम करता हूँ",
+      "contact.label":"संपर्क","contact.h2":"30 मिनट की मुफ़्त जाँच बुक करें",
+      "contact.lead":"बताइए आपके दफ़्तर में क्या काम धीमा करता है। मैं आपका मौजूदा सेटअप देखूँगा और साफ़ बताऊँगा कि क्या ठीक करना फ़ायदेमंद है। कोई फ़ीस नहीं, कोई बाध्यता नहीं।",
+      "f.name":"आपका नाम","f.company":"कंपनी","f.area":"एरिया","f.areaPh":"जैसे भोसरी MIDC, चिंचवड","f.soft":"अभी कौन सा सॉफ़्टवेयर चलाते हैं","opt.excel":"सिर्फ़ Excel","opt.other":"दूसरा / कोई नहीं",
+      "f.issue":"क्या काम धीमा करता है?","f.issuePh":"जैसे स्टॉक कभी मेल नहीं खाता, एक ही एंट्री दो बार होती है","f.send":"WhatsApp पर भेजें","f.note":"आपका मैसेज भरा हुआ WhatsApp खुलेगा। इस साइट पर कुछ भी सेव नहीं होता।",
+      "direct.h":"या सीधे संपर्क करें","direct.call":"कॉल","direct.email":"ईमेल","copy":"कॉपी","copied":"कॉपी हो गया",
+      "direct.area":"मैं भोसरी MIDC और पूरे पिंपरी-चिंचवड में बिज़नेस से मिलने आता हूँ।",
+      "footer.tag":"पिंपरी-चिंचवड के बिज़नेस के लिए डेटा, सॉफ़्टवेयर और वेबसाइट।",
+      "wa.hero":"नमस्ते हुसैन जी, हम अपने बिज़नेस के लिए मुफ़्त जाँच बुक करना चाहते हैं।",
+      "wa.form":"नमस्ते हुसैन जी, हमें मुफ़्त जाँच चाहिए।","wa.issue":"दिक्कत"
+    },
+    mr: {
+      "nav.services":"सेवा","nav.work":"काम","nav.process":"कामाची पद्धत","nav.about":"ओळख","nav.contact":"संपर्क","nav.cta":"मोफत तपासणी",
+      "hero.eyebrow":"भोसरी MIDC · पिंपरी-चिंचवड",
+      "hero.h1":"तुमच्या व्यवसायाचा डेटा कामाला लावा.",
+      "hero.lead":"उत्पादक आणि ट्रेडर्ससाठी डेटावर आधारित उपाय: स्वच्छ आणि जोडलेला डेटा, कमी हाताने एंट्री, निर्णय घेता येतील असे रिपोर्ट आणि डॅशबोर्ड, चांगले सॉफ्टवेअर, आणि नवीन चौकशी आणणारी वेबसाइट. तुमचा डेटा Tally, DataScan, Excel किंवा रजिस्टरमध्ये असो, तो वापरात आणायला मी मदत करतो.",
+      "hero.cta1":"WhatsApp वर मोफत तपासणी बुक करा","hero.cta2":"अपेक्षा अलॉयजचे उदाहरण पाहा",
+      "hero.note":"पुणे आणि न्यूयॉर्कमध्ये डेटा ॲनालिस्ट म्हणून 8 वर्षांचा अनुभव. 2015 पासून भोसरी MIDC मधील स्टील व्यवसायात भागीदार.",
+      "demo.label":"तुमचा डेटा या प्रश्नांची उत्तरे देऊ शकतो","demo.sub":"या बिलासाठी स्टॉक आहे का?","tab.stock":"स्टॉक तपासणी","tab.rate":"दरांचा इतिहास","tab.party":"कमी खरेदी करणाऱ्या पार्ट्या","rate.q":"पार्टी A ला कोणता दर सांगू?","rate.date":"ऑर्डर तारीख","rate.rate":"दर (₹/kg)","rate.sugg":"सुचवलेला दर: ₹123–125/kg","rate.sub":"मागील तीन ऑर्डर आणि आजच्या खरेदी खर्चावर आधारित.","rate.cap":"उदाहरण डेटा, अपेक्षा अलॉयजमध्ये तयार होत असलेल्या दर शोधकातून.","party.q":"कोणते नियमित ग्राहक दूर जात आहेत?","party.p":"पार्टी","party.last":"आधी","party.now":"आता","party.chg":"बदल","party.flag":"3 पार्ट्यांची खरेदी 15% पेक्षा जास्त घटली आहे. या आठवड्यात फोन करणे योग्य ठरेल.","party.cap":"उदाहरण डेटा, मागील आणि या तिमाहीची खरेदी, टनमध्ये. हेच विश्लेषण तुमच्या स्वतःच्या विक्री रेकॉर्डवरही करता येते.","demo.item":"माल","demo.itemVal":"EN31 राउंड बार, Ø 80 mm",
+      "demo.stock":"गोडाऊनमधील स्टॉक","demo.qty":"या बिलातील प्रमाण","demo.ok":"बिल करता येईल","demo.left":"या बिलानंतर उरलेला स्टॉक: {n} kg",
+      "demo.block":"थांबवले: {n} kg कमी आहे","demo.blockSub":"आधी माल मागवा किंवा प्रमाण कमी करा.","demo.caption":"हाच नियम अपेक्षा अलॉयजमध्ये लागू केला. स्लायडर हलवून पाहा.",
+      "problems.label":"ओळखीचं वाटतंय?","problems.h2":"बहुतेक MIDC ऑफिसांमध्ये वेळ आणि पैसा इथेच वाया जातो",
+      "p1":"एकच ऑर्डर तीनदा टाइप होते: चलन, बिल, मग Excel.","p2":"स्टॉक रजिस्टर आणि खरेदीच्या एंट्री जुळत नाहीत, आणि कधीपासून ते कोणालाच माहीत नाही.",
+      "p3":"महिन्याचे रिपोर्ट हाताने तयार होतात, म्हणून उशिरा मिळतात.","p4":"दर आणि पार्टीचा सगळा इतिहास एकाच माणसाच्या डोक्यात असतो.","p5":"ऑनलाइन फक्त एखादी जुनी IndiaMART किंवा JustDial लिस्टिंग असते.",
+      "services.label":"सेवा","services.h2":"मी काय करतो",
+      "s1.t":"सॉफ्टवेअरची साफसफाई आणि ऑटोमेशन","s1.d":"Tally, DataScan आणि Excel एकत्र चालवणे. दुबार एंट्री काढून टाकणे, योग्य टप्प्यावर तपासणी लावणे, आणि जिथे सॉफ्टवेअर कमी पडते तिथे छोटी टूल्स बनवणे.",
+      "s2.t":"डेटा विश्लेषण आणि रिपोर्ट","s2.d":"पार्टी आणि ग्रेडनुसार विक्री, दरांचा इतिहास, मार्जिन, हळू हलणारा स्टॉक, आणि कमी खरेदी करणाऱ्या पार्ट्या. स्पष्ट रिपोर्ट जे तुमची टीम कोणत्याही दिवशी पाहू शकते, फक्त महिनाअखेरीला नाही.",
+      "s3.t":"औद्योगिक व्यवसायांसाठी वेबसाइट","s3.d":"तुमची उत्पादने, फोटो आणि WhatsApp कोटेशन बटण असलेली वेगवान वेबसाइट, इंग्रजी, हिंदी आणि मराठीत, जेणेकरून खरेदीदार तुम्हाला Google वर शोधू शकतील.","s3.k":"कॅटलॉग · WhatsApp · Google",
+      "s4.t":"प्रक्रिया सल्ला","s4.d":"ऑर्डर चौकशीपासून डिस्पॅचपर्यंत कसा जातो ते आपण पाहतो, चुका कुठे होतात ते शोधतो, आणि माणसाला दोष देण्याऐवजी ती पायरी सुधारतो.","s4.k":"चौकशी → डिस्पॅच · स्टॉक · बिलिंग",
+      "work.label":"काम","work.h2":"केस स्टडी: अपेक्षा अलॉयज इन LLP",
+      "work.intro":"भोसरी MIDC मधील स्टील स्टॉकिस्ट, जो 500+ व्यवसायांना कार्बन, अलॉय आणि टूल स्टील मापात कापून पुरवतो. हा माझ्या कुटुंबाचा व्यवसाय आहे आणि माझा पहिला क्लायंट.",
+      "c1.tag":"डेटा विश्लेषण · प्रक्रिया","c1.t":"प्रत्येक बिलाआधी स्टॉक तपासणी","c1.bl":"आधी","c1.al":"आता",
+      "c1.b":"आधी बिल बनायचे आणि स्टॉकचा ताळमेळ नंतर व्हायचा. मी DataScan चा डेटा तपासला तेव्हा रेकॉर्डवरील स्टॉक खरेदीच्या एंट्रीशी जुळत नव्हता.",
+      "c1.a":"मी एक सोपा नियम सुचवला: बिल बनण्याआधी त्या मालाचा स्टॉक बिलाशी तपासला जातो, आणि माल असेल तरच बिल पुढे जाते.",
+      "c1.r":"परिणाम: आता बिलांनुसार स्टॉक अचूक आहे.",
+      "c2.tag":"सॉफ्टवेअर","c2.t":"DataScan सोपे केले","c2.d":"रोजच्या एंट्रीचे काम समजून घेतले आणि वारंवार होणाऱ्या कंटाळवाण्या एंट्री कमी केल्या, जेणेकरून स्टाफला तीच माहिती पुन्हा टाइप करावी लागत नाही.",
+      "c3.tag":"वेबसाइट","c3.t":"तीन भाषांमध्ये वेबसाइट","c3.d":"आठ मटेरियल फॅमिली, कटिंग आणि टेस्टिंग सेवा, उद्योगांची माहिती, आणि थेट WhatsApp वर जाणारा कोटेशन फॉर्म. याने जुन्या डिरेक्टरी लिस्टिंगची जागा घेतली.","c3.link":"apekshaalloys.com पाहा",
+      "c4.tag":"काम सुरू","c4.t":"दर शोधक आणि विक्री विश्लेषण","c4.d":"चलन एक्सपोर्टवर आधारित टूल: पार्टी आणि ग्रेडनुसार दर सुचवते, आणि खरेदी कमी केलेल्या पार्ट्या दाखवते जेणेकरून टीम त्यांच्याशी संपर्क साधू शकेल.",
+      "exp.label":"अनुभव","exp.h2":"मोठ्या संस्थांच्या पद्धती, तुमच्या व्यवसायाच्या मापाने",
+      "e3.org":"अमेरिकन वितरक (कॉन्ट्रॅक्ट)","e3.d":"हाताने चालणाऱ्या Excel ऑर्डरिंगऐवजी व्हेंडरच्या सिस्टमशी जोडलेले ऑर्डर-एंट्री टूल बनवले, जे प्रत्येक आयटम मास्टर कॅटलॉगशी जुळवते.",
+      "e2.d":"50,000+ रुग्णांचे रेकॉर्ड वेळेत नवीन सॉफ्टवेअरमध्ये नेले, डेटा साफसफाई, तपासणी आणि 50+ स्टाफच्या प्रशिक्षणासह. Tally मधून बदल करतानाही हीच काळजी लागते.",
+      "e1.d":"विभाग प्रमुखांसाठी मुख्य Power BI रिपोर्ट तयार केले, ज्यामुळे वेगवेगळ्या रिपोर्टची मागणी निम्मी झाली. 15+ Excel आणि VBA कामे ऑटोमेटेड Python वर नेली, ज्यामुळे मासिक रिपोर्टिंग 20% लवकर होऊ लागले.",
+      "e4.d":"हाताने तयार होणाऱ्या विक्री रिपोर्टऐवजी जोडलेले SQL आणि Excel डॅशबोर्ड बनवले, ज्यामुळे मासिक रिपोर्ट तयार करण्याचा वेळ 60% कमी झाला.",
+      "process.label":"कामाची पद्धत","process.h2":"पहिल्या भेटीपासून चालू सिस्टमपर्यंत",
+      "st1.t":"मोफत तपासणी","st1.d":"तुमच्या ऑफिसमध्ये किंवा कॉलवर 30 मिनिटे. आत्ता ऑर्डर, स्टॉक आणि बिलिंग कसे चालते ते मी पाहतो.",
+      "st2.t":"लेखी निष्कर्ष","st2.d":"सोप्या भाषेत छोटी नोंद: कशामुळे वेळ किंवा पैसा जातो, आधी काय सुधारायचे, आणि प्रत्येक कामाची किंमत.",
+      "st3.t":"तयार करणे आणि बसवणे","st3.d":"एका वेळी एक बदल, तुमच्या स्टाफसोबत, रोजचे बिलिंग न थांबवता.",
+      "st4.t":"प्रशिक्षण आणि सपोर्ट","st4.d":"तुमची टीम नवी पद्धत शिकते, आणि सुरू झाल्यानंतरही मी उपलब्ध असतो.",
+      "process.trust":"तुमचा डेटा तुमच्याकडेच राहतो. मी तुमच्या ऑफिसमध्ये किंवा तुमच्याच कॉम्प्युटरवर काम करतो, आणि काहीही बाहेर शेअर होत नाही.",
+      "about.label":"ओळख",
+      "about.p1":"2015 पासून मी माझ्या वडिलांसोबत भोसरी MIDC मधील स्टील स्टॉकिस्ट, अपेक्षा अलॉयजमध्ये भागीदार आहे. महिनाअखेरीला बिलिंग डेस्कची काय अवस्था असते, आणि त्यामागच्या सॉफ्टवेअरवर किती काही अवलंबून असते, हे मला माहीत आहे.",
+      "about.p2":"त्यानंतर मी न्यूयॉर्कमध्ये पाच वर्षे घालवली, बिझनेस ॲनालिटिक्समध्ये मास्टर्स केले आणि हेल्थकेअरमध्ये डेटा ॲनालिस्ट म्हणून काम केले. आता मी पुण्यात परत आलो आहे आणि त्या पद्धती आपल्यासारख्या व्यवसायांपर्यंत आणतो आहे.",
+      "f1":"डेटा विश्लेषणात 8 वर्षे","f2":"MS बिझनेस ॲनालिटिक्स, Adelphi University, न्यूयॉर्क (GPA 3.97)","f3":"B.Com, सावित्रीबाई फुले पुणे विद्यापीठ","f4":"भागीदार, अपेक्षा अलॉयज इन LLP",
+      "tools.label":"मी वापरत असलेली टूल्स",
+      "contact.label":"संपर्क","contact.h2":"30 मिनिटांची मोफत तपासणी बुक करा",
+      "contact.lead":"तुमच्या ऑफिसमध्ये काय काम मंद करते ते सांगा. मी तुमचा सध्याचा सेटअप पाहीन आणि काय सुधारणे फायद्याचे आहे ते स्पष्ट सांगेन. कोणतीही फी नाही, कोणतेही बंधन नाही.",
+      "f.name":"तुमचे नाव","f.company":"कंपनी","f.area":"भाग","f.areaPh":"उदा. भोसरी MIDC, चिंचवड","f.soft":"सध्या कोणते सॉफ्टवेअर वापरता","opt.excel":"फक्त Excel","opt.other":"इतर / काहीही नाही",
+      "f.issue":"काय काम मंद करते?","f.issuePh":"उदा. स्टॉक कधीच जुळत नाही, एकच एंट्री दोनदा होते","f.send":"WhatsApp वर पाठवा","f.note":"तुमचा मेसेज भरलेले WhatsApp उघडेल. या साइटवर काहीही सेव्ह होत नाही.",
+      "direct.h":"किंवा थेट संपर्क करा","direct.call":"कॉल","direct.email":"ईमेल","copy":"कॉपी","copied":"कॉपी झाले",
+      "direct.area":"मी भोसरी MIDC आणि संपूर्ण पिंपरी-चिंचवडमधील व्यवसायांना भेट देतो.",
+      "footer.tag":"पिंपरी-चिंचवडमधील व्यवसायांसाठी डेटा, सॉफ्टवेअर आणि वेबसाइट.",
+      "wa.hero":"नमस्कार हुसेन, आम्हाला आमच्या व्यवसायासाठी मोफत तपासणी बुक करायची आहे.",
+      "wa.form":"नमस्कार हुसेन, आम्हाला मोफत तपासणी हवी आहे.","wa.issue":"अडचण"
+    },
+    en: {
+      "demo.ok":"Ready to invoice","demo.left":"Stock left after this bill: {n} kg","demo.block":"Blocked: short by {n} kg","demo.blockSub":"Bring in material or lower the quantity first.",
+      "copied":"Copied","wa.hero":"Hello Husein, I'd like to book a free check-up for my business.","wa.form":"Hello Husein, I'd like a free check-up.","wa.issue":"What slows us down"
+    }
+  };
+  // English strings come from the page itself
+  document.querySelectorAll("[data-i18n]").forEach(function(el){ T.en[el.dataset.i18n] = el.textContent; });
+  document.querySelectorAll("[data-i18n-ph]").forEach(function(el){ T.en[el.dataset.i18nPh] = el.getAttribute("placeholder"); });
+
+  var lang = "en";
+  function t(k){ return (T[lang] && T[lang][k] != null) ? T[lang][k] : T.en[k]; }
+
+  function waLink(text){ return "https://wa.me/" + WA + "?text=" + encodeURIComponent(text); }
+
+  function setLang(l){
+    if(!T[l]) l = "en";
+    lang = l;
+    document.documentElement.lang = l;
+    document.querySelectorAll("[data-i18n]").forEach(function(el){ el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll("[data-i18n-ph]").forEach(function(el){ el.setAttribute("placeholder", t(el.dataset.i18nPh)); });
+    document.querySelectorAll(".lang button").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.lang === l ? "true" : "false"); });
+    document.querySelectorAll(".js-wa-hero").forEach(function(a){ a.href = waLink(t("wa.hero")); });
+    updateDemo();
+    try{ localStorage.setItem("hg-lang", l); }catch(e){}
+  }
+
+  // invoice check demo
+  var STOCK = 96, qty = document.getElementById("qty");
+  function updateDemo(){
+    var q = +qty.value, box = document.getElementById("status");
+    document.getElementById("qty-v").textContent = q;
+    var ok = q <= STOCK;
+    box.className = "status " + (ok ? "ok" : "bad");
+    document.getElementById("status-t").textContent = ok ? t("demo.ok") : t("demo.block").replace("{n}", q - STOCK);
+    document.getElementById("status-s").textContent = ok ? t("demo.left").replace("{n}", STOCK - q) : t("demo.blockSub");
+  }
+  qty.addEventListener("input", updateDemo);
+
+  // demo tabs
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function selectTab(tab, focus){
+    tabs.forEach(function(x){
+      var on = x === tab;
+      x.setAttribute("aria-selected", on ? "true" : "false");
+      x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
+    });
+    if(focus) tab.focus();
+  }
+  tabs.forEach(function(tab, i){
+    tab.addEventListener("click", function(){ selectTab(tab); });
+    tab.addEventListener("keydown", function(e){
+      var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if(d){ e.preventDefault(); selectTab(tabs[(i + d + tabs.length) % tabs.length], true); }
+    });
+  });
+
+  document.querySelectorAll(".lang button").forEach(function(b){ b.addEventListener("click", function(){ setLang(b.dataset.lang); }); });
+
+  // form -> WhatsApp
+  document.getElementById("audit-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    function v(id){ return document.getElementById(id).value.trim(); }
+    var sel = document.getElementById("f-soft");
+    var lines = [t("wa.form")];
+    [["f.name","f-name"],["f.company","f-company"],["f.area","f-area"]].forEach(function(p){ if(v(p[1])) lines.push(t(p[0]) + ": " + v(p[1])); });
+    lines.push(t("f.soft") + ": " + sel.options[sel.selectedIndex].textContent);
+    if(v("f-issue")) lines.push(t("wa.issue") + ": " + v("f-issue"));
+    var a = document.createElement("a");
+    a.href = waLink(lines.join("\n")); a.target = "_blank"; a.rel = "noopener";
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  // copy buttons
+  document.querySelectorAll(".copy").forEach(function(b){
+    b.addEventListener("click", function(){
+      var text = b.dataset.copy;
+      function done(){ b.textContent = t("copied"); setTimeout(function(){ b.textContent = t("copy"); }, 1600); }
+      function fallback(){ var s = window.getSelection(), r = document.createRange(); r.selectNodeContents(b.previousElementSibling); s.removeAllRanges(); s.addRange(r); }
+      try{ navigator.clipboard.writeText(text).then(done, fallback); }catch(e){ fallback(); }
+    });
+  });
+
+  var saved = null;
+  try{ saved = localStorage.getItem("hg-lang"); }catch(e){}
+  setLang(saved || "en");
+})();
+</script>
+
+</body>
+</html>
